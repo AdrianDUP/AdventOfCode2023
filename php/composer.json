@@ -4,12 +4,16 @@
     "type": "project",
     "require": {
         "blank-framework/file-path-router": "^1.0",
-        "symfony/http-foundation": "^7.0"
+        "symfony/http-foundation": "^7.0",
+        "monolog/monolog": "^3.5"
     },
     "autoload": {
         "psr-4": {
             "Adrian\\AdventOfCode2023\\": "src/"
-        }
+        },
+        "files": [
+            "functions/logging.php"
+        ]
     },
     "authors": [
         {
