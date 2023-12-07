@@ -22,8 +22,15 @@ if (!function_exists('logger')) {
 }
 
 if (!function_exists('debug')) {
-    function debug(string|\Stringable $message, array $context): void
+    function debug(string|\Stringable $message, array $context = []): void
     {
         logger()->debug($message, $context);
+    }
+}
+
+if (!function_exists('info')) {
+    function info(string|\Stringable $message, array $context = []): void
+    {
+        logger()->info($message, $context);
     }
 }

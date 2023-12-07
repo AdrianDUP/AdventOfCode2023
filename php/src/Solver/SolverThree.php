@@ -12,13 +12,26 @@ class SolverThree
 
     public function processLine(): void
     {
+        debug('Processing line');
         $currentNumber = null;
         $isValidNumber = false;
 
         foreach($this->line2 as $index => $character) {
+            debug(
+                'Checking character', [
+                'index' => $index,
+                'character' => $character,
+                ]
+            );
             switch($character) {
             case '.':
+                debug('is dot');
                 if (!is_null($currentNumber) && $isValidNumber) {
+                    info(
+                        'Adding number', [
+                        'number' => $currentNumber,
+                        ]
+                    );
                     $this->total += (int) $currentNumber;
                 }
                 $currentNumber = null;
@@ -34,6 +47,7 @@ class SolverThree
             case '8':
             case '9':
             case '0':
+                debug('is number');
                 if (is_null($currentNumber)) {
                     $currentNumber = $character;
                 } else {
@@ -47,7 +61,13 @@ class SolverThree
                 }
                 break;
             default:
+                debug('isSymbol');
                 if (!is_null($currentNumber) && $isValidNumber) {
+                    info(
+                        'Adding number', [
+                        'number' => $currentNumber,
+                        ]
+                    );
                     $this->total += (int) $currentNumber;
                 }
                 $currentNumber = null;
@@ -70,25 +90,30 @@ class SolverThree
             $previousIndex = $index - 1;
 
             $line1 = $this->line1[$previousIndex] ?? '.';
+            debug('Prev Line1', ['character' => $line1]);
             $line2 = $this->line2[$previousIndex] ?? '.';
+            debug('Prev Line2', ['character' => $line2]);
             $line3 = $this->line3[$previousIndex] ?? '.';
+            debug('Prev Line3', ['character' => $line3]);
 
             if ($this->isSymbol($line1)
                 || $this->isSymbol($line2)
                 || $this->isSymbol($line3)
             ) {
-                //printf('Previous index');
+                debug('Return 1');
                 return true;
             }
         }
 
         $line1 = $this->line1[$index] ?? '.';
+            debug('Same Line1', ['character' => $line1]);
         $line3 = $this->line3[$index] ?? '.';
+            debug('Same Line3', ['character' => $line3]);
 
         if ($this->isSymbol($line1)
             || $this->isSymbol($line3)
         ) {
-            //printf('Current index');
+            debug('Return 2');
             return true;
         }
 
@@ -96,24 +121,28 @@ class SolverThree
             $nextIndex = $index + 1;
 
             $line1 = $this->line1[$nextIndex] ?? '.';
+            debug('Next Line1', ['character' => $line1]);
             $line2 = $this->line2[$nextIndex] ?? '.';
+            debug('Next Line1', ['character' => $line2]);
             $line3 = $this->line3[$nextIndex] ?? '.';
+            debug('Next Line1', ['character' => $line3]);
 
             if ($this->isSymbol($line1)
                 || $this->isSymbol($line2)
                 || $this->isSymbol($line3)
             ) {
-                //printf('Next index');
+                debug('Return 3');
                 return true;
             }
         }
 
+        debug('Return 4');
         return false;
     }
 
     private function isSymbol(string $character): bool
     {
-        return 1 === preg_match('/[^\.0-9]/', $character);
+        return 1 === preg_match('/[^\.0-9\n]/', $character);
     }
 
     public function getTotal(): int
