@@ -35,50 +35,6 @@ if (!function_exists('info')) {
     }
 }
 
-function day7Sort($a, $b): int
-{
-    $aParts = str_split($a);
-    $bParts = str_split($b);
-
-    $uniqueA = array_unique($aParts);
-    $uniqueB = array_unique($aParts);
-
-    if (count($uniqueA) !== count($uniqueB)) {
-        if (count($uniqueA) < count($uniqueB)) {
-            return 1;
-        } else {
-            return -1;
-        }
-    }
-
-    foreach ($aParts as $index => $card) {
-        $bCard = $bParts[$index];
-        if ($card == $bCard) {
-            continue;
-        }
-
-        if ($card === 'A') {
-            return 1;
-        } else if ($bCard === 'A') {
-            return -1;
-        } else if ($card === 'K') {
-            return 1;
-        } else if ($bCard === 'K') {
-            return -1;
-        } else if ($card === 'Q') {
-            return 1;
-        } else if ($bCard === 'Q') {
-            return -1;
-        } else if ($card === 'J') {
-            return 1;
-        } else if ($bCard === 'J') {
-            return -1;
-        } else if ($card === 'T') {
-            return 1;
-        } else if ($bCard === 'T') {
-            return -1;
-        } else {
-            return $card <=> $bCard;
-        }            
-    }
+function printSolution(int $solution): void {
+    printf('<p>%s</p>', $solution);
 }

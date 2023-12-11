@@ -1,5 +1,7 @@
 <?php
 
+set_time_limit(600);
+
 use BlankFramework\FilePathRouter\FilePathRouter;
 use Symfony\Component\HttpFoundation\Request;
 
