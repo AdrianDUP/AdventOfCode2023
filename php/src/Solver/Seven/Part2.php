@@ -16,6 +16,22 @@ class Part2
                 $uniqueA = array_count_values($aParts);
                 $uniqueB = array_count_values($bParts);
 
+                arsort($uniqueA);
+                arsort($uniqueB);
+
+                $keysA = array_keys($uniqueA);
+                $keysB = array_keys($uniqueB);
+
+                $boostedA = $uniqueA;
+                $boostedB = $uniqueB;
+
+                if ($keysA[0] === 'J' && empty($boostedA['A'])) {
+                    $boostedA['A'] = $boostedA['J'];
+                    unset($boostedA['J']);
+                } elseif (!empty($boostedA['J'])) {
+                    if ($keysA)
+                }
+
                 if (count($uniqueA) !== count($uniqueB)) {
                     if (count($uniqueA) < count($uniqueB)) {
                         debug('Exit 1');
