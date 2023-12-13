@@ -18,12 +18,23 @@ class Part1
     }
 
     private function checkForMirrorIndex(array $lines): ?int {
+        $checkLine = $lines[0];
         $lineCount = count($lines);
+        $matchKey = null;
 
-        for ($i = 0; $i < $lineCount; $i++) {
-            if ($lines[0] !== $lines[$lineCount - ($i + 1)]) {
-                return null;
+        end($lines);
+
+        while (key($lines) !== 1) {
+            if (prev($lines) !== $checkLine) {
+                continue;
+            } else {
+                $matchKey = key($lines);
+                break;
             }
+        }
+
+        if (!is_null($matchKey)) {
+
         }
     }
 
